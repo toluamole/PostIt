@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "Toluwanimi",
+    "password": "Babatunde",
+    "database": "postitdb",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "Toluwanimi",
+    "password": "Babatunde",
+    "database": "postitdb_test",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "Toluwanimi",
+    "password": "Babatunde",
+    "database": "postitdb_production",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "dialect": "postgres"
+  }
+}
