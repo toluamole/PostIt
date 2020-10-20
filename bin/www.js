@@ -1,5 +1,5 @@
 //This the application entry
-const http = require('http');
+const http = require('http')
 const app = require('../app');
 
 const port = parseInt(process.env.PORT, 10) || 8000;

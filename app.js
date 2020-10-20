@@ -9,7 +9,7 @@ const app = express();
 app.use(logger('dev'));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 
 //Setup a default catch-all route that sebds back a welcome message
 app.get('*', (req, res) => res.status(200).send({
