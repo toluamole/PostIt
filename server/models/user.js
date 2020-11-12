@@ -8,25 +8,55 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Please enter your name'
+        }
+      }
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: {
+       args: false,
+       msg: 'please enter your email address'
+      },
+      unique: {
+        args: true,
+      },
       validate: {
-        isEmail: true,
+        isEmail: {
+          args: true,
+          msg: 'Please enter a valid email address'
+        }
       }
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
+      allowNull: {
+        args: false,
+        msg: 'Please enter a password'
+      },
       validate: {
-        min: 8,
+        isNotShort: (value) => {
+          if(value.length < 8) {
+            throw new Error('password should be atleast 8 characters')
+          }
+        }
       }
     },
     telephone: {
       type: DataTypes.BIGINT,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Please enter your telephone number'
+        }
+      },
+      unique: {
+       args: true,
+      }
     }
   });
   
@@ -34,6 +64,24 @@ module.exports = (sequelize, DataTypes) => {
      const salt = await bcrypt.genSalt();
      user.password = await bcrypt.hash(user.password, salt)
   });
+
+  User.login = async function(email, password){
+    const user = await this.findOne({
+      where: {
+        email: email
+      }
+    });
+    if(user){
+      const auth = await bcrypt.compare(password, user.password);
+      if(auth){
+        return user
+      }else{
+        throw Error('Incorrect Password')
+      }
+    }else{
+      throw Error('Incorrect Email')
+    }
+  }
   // User.associate = (models) => {
   //   // associations here
   // }
