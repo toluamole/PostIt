@@ -60,11 +60,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
   
+  // Hashing user's password
   User.beforeCreate( async function(user, options){
      const salt = await bcrypt.genSalt();
      user.password = await bcrypt.hash(user.password, salt)
   });
 
+  //Comparing User's password with hashed password
   User.login = async function(email, password){
     const user = await this.findOne({
       where: {
