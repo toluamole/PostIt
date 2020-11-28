@@ -51,6 +51,12 @@ module.exports.login_post = async(req, res) => {
   }
 }
 
+//Logout controller function
+module.exports.logout_get = (req, res) => {
+  res.cookie('jwt', '', {maxAge: 1} )
+  res.redirect('/')
+}
+
 
 // Find a user and send a reset link to their email
 module.exports.sendResetLink = async (req, res) => {
