@@ -7,5 +7,6 @@ router.post('/api/user/signup', users.signup_post);
 router.post('/api/user/login', users.login_post);
 router.post('/api/user/forgotPassword', users.sendResetLink);
 router.post('/reset_password/:token', users.resetPassword);
+router.get('/api/user/logout', users.logout_get)
 
 module.exports = router;
